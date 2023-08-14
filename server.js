@@ -1,0 +1,22 @@
+const express = require("express")
+const cors = require("cors") //middle wear function that returns function, sticks cors headers
+require('dotenv').config() 
+const port = process.env.PORT
+
+const app = express()
+
+app.use(cors()) 
+app.use(express.json())
+
+app.get("/", async (req,res) => {
+    try {
+        res.json({success: "Connected"})
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({error: "Server error"})
+    }
+})
+
+app.listen(port, () => {
+    console.log(`Server running on ${port}`)
+})
